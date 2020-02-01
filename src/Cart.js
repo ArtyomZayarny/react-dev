@@ -89,6 +89,8 @@ class Cart extends Component{
             <h2>Total: {sum}</h2>
         </>
     )
+
+    
    }
 }
 
