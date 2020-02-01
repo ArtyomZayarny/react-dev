@@ -4,7 +4,6 @@ import Product from './products/Product'
 
 class Cart extends Component{
     state = {
-        totalSum:0,
         products: [
             {
                 id:1,
@@ -30,16 +29,8 @@ class Cart extends Component{
       
    }
 
-    products(){
-        let products = [...this.state.products];
-        let list = products.map( (el , i) => {
-                return (
-                    <Product deleteProduct={this.deleteProduct} key={el.name} product={el} getTotalSum={this.getTotalSum} />
-                )
-        })
-        return list;
-    }
-    getTotalSum = (sum,id) => {
+   
+    changeSum = (sum,id) => {
        
          let products = [...this.state.products];
          let newProducts = products.map( (product) => {
@@ -56,8 +47,7 @@ class Cart extends Component{
          })
 
          this.setState({
-             products:newProducts,
-             totalSum:newTotalSum
+             products:newProducts
          });
         
     }
@@ -71,8 +61,14 @@ class Cart extends Component{
     }
    
    render() {
-     
-       
+       let products = [...this.state.products];
+       let sum = 0;
+       let list = products.map( (el , i) => {
+        sum += el.current;
+        return (
+            <Product deleteProduct={this.deleteProduct} key={el.name} product={el} getTotalSum={this.changeSum} />
+        )
+})
        
     return(
         <>
@@ -86,11 +82,11 @@ class Cart extends Component{
                 </tr>
                 </thead>
                 <tbody>
-                     {this.products()}
+                     {list}
                 </tbody>
             </table>
             <hr/>
-            <h2>Total: {!this.state.totalSum ? this.renderSum() : this.state.totalSum}</h2>
+            <h2>Total: {sum}</h2>
         </>
     )
    }

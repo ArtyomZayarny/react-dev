@@ -4,6 +4,7 @@ import Counter from '../counters/Counter'
 class Product extends Component {
     constructor(props) {
         super(props)
+       // console.log(this.props.getTotalSum);
         
         this.state = {
             total:'',
@@ -18,7 +19,7 @@ class Product extends Component {
           cnt:newCnt,
           total:total
       });   
-      this.props.getTotalSum(total, this.props.product.id)
+     this.props.getTotalSum(total, this.props.product.id)
     }
 
     render() {
